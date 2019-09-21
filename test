@@ -15,7 +15,7 @@ else
    echo "unknown, Please try again."
 fi
 if (echo "$cd" | fgrep -wq -e exit);then
-    kill -9
+    kill -9 $(pgrep -f toor)
 else
     echo "Not a directory! Please try again."
 fi
