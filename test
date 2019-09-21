@@ -22,4 +22,29 @@ if (echo "$to" | fgrep -wq -e root);then
    sleep 4
    sh ~/newOS/toor
 fi
+
+while true; do
+echo "There is only one option because this is just a test. 
+What do you want to do?
+(cd)"
+read cd
+
+if (echo "$cd" | fgrep -wq -e cd);then
+   read -p "what do you want to cd?: " to
+else
+   echo "unknown, Please try again."
+fi
+
+if (echo "$to" | fgrep -wq -e home);then
+    echo "You are already home!"
+else
+    echo "Not a directory! Please try again."
+fi
+if (echo "$to" | fgrep -wq -e root);then
+   echo "Switching to root..." && sleep 2
+   echo "You have switched to root! Please wait..."
+   sleep 4
+   sh ~/newOS/toor
+fi
+done
  
