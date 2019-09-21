@@ -7,6 +7,7 @@ read cd
 
 if (echo "$to" | fgrep -wq -e home);then
 kill -9 $(pgrep -f test)
+fi
 
 if (echo "$cd" | fgrep -wq -e cd);then
    read -p "what do you want to cd?: " to
