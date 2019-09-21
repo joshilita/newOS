@@ -6,7 +6,7 @@ What do you want to do?
 read cd
 
 if (echo "$to" | fgrep -wq -e home);then
-kill -9 $(pgrep -f test)
+echo "You are already home!"
 fi
 
 if (echo "$cd" | fgrep -wq -e cd);then
@@ -15,7 +15,7 @@ else
    echo "unknown, Please try again."
 fi
 if (echo "$cd" | fgrep -wq -e exit);then
-    echo "You are already home!"
+    kill -9
 else
     echo "Not a directory! Please try again."
 fi
