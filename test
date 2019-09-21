@@ -5,13 +5,15 @@ What do you want to do?
 (cd)"
 read cd
 
+if (echo "$to" | fgrep -wq -e home);then
+kill -9 $(pgrep -f test)
+
 if (echo "$cd" | fgrep -wq -e cd);then
    read -p "what do you want to cd?: " to
 else
    echo "unknown, Please try again."
 fi
-
-if (echo "$to" | fgrep -wq -e home);then
+if (echo "$cd" | fgrep -wq -e exit);then
     echo "You are already home!"
 else
     echo "Not a directory! Please try again."
