@@ -1,4 +1,15 @@
-echo "This is a tooster. Please know that there will be errors during your test."
+echo "Updating... (If possible)
+sleep 2
+git pull https://github.com/joshilita/newOS
+sleep 2
+echo "Done!"
+sleep 2
+
+
+
+
+
+echo "This is a test. Please know that there will be errors during your test."
 echo ""
 echo "There is only one option because this is just a test. 
 What do you want to do?
