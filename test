@@ -4,8 +4,10 @@ git pull https://github.com/joshilita/newOS
 sleep 2
 echo "Done!"
 sleep 2
-
-
+echo "Updating toor... (If possible)"
+sleep 4
+echo "Completed!"
+echo "Press CTRL+Z to stop the running OS to complete the update."
 
 
 
