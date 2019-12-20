@@ -36,7 +36,7 @@ if (echo "$to" | fgrep -wq -e root);then
    echo "Switching to root..." && sleep 2
    echo "You have switched to root! Please wait..."
    sleep 4
-   sh ~/newOS/toor
+   bash ~/newOS/toor
 fi
 
 while true; do
@@ -60,7 +60,7 @@ if (echo "$to" | fgrep -wq -e root);then
    echo "Switching to root..." && sleep 2
    echo "You have switched to root! Please wait..."
    sleep 4
-   sh ~/newOS/toor
+   bash ~/newOS/toor
 fi
 done
  
