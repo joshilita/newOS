@@ -1,7 +1,10 @@
 #! /bin/bash
 echo "Updating... (If possible)"
 sleep 2
+git stash
 git pull https://github.com/joshilita/newOS
+chmod +x test
+chmod +x toor
 sleep 2
 echo "Done!"
 sleep 2
