@@ -1,10 +1,11 @@
-#!/data/data/com.termux/files/usr/bin/bash
+#!/bin/bash
 
 echo "You are now in root. Remember this is just a demo or a test. Type ls to find a file you need"
 
 GREENFG="\e[38;5;82m"
 REDWEAKFG="\e[38;5;132m"
 BBLUEFG="\e[1;38;5;75m"
+GBLUEFG="\e[1;38;5;73m"
 FOLDERNAMEFG="\e[1;38;5;45m"
 ERRORFG="\e[1;38;5;197m"
 RESET="\e[0m"
@@ -22,6 +23,7 @@ while true; do
 
   if ( echo $input | fgrep -wq -e exit );then
     echo -e "${GREENFG}Exiting...${RESET}"
+    echo -en "\ec"
     exit 0
   fi
 

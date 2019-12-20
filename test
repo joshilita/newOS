@@ -1,71 +1,64 @@
-#!/data/data/com.termux/files/usr/bin/bash
+#!/bin/bash
 
 echo "Updating... (If possible)"
 sleep 2
-git stash
-git pull https://github.com/joshilita/newOS
-chmod +x ~/newOS/test
-chmod +x ~/newOS/toor
-sleep 2
-echo "Done!"
-sleep 2
-echo "Updating toor... (If possible)"
-sleep 4
-echo "Completed!"
-echo "Press CTRL+Z to stop the running OS to complete the update."
 
+UPSTREAM=${1:-'@{u}'}
+LOCAL=$(git rev-parse @)
+REMOTE=$(git rev-parse "$UPSTREAM")
+BASE=$(git merge-base @ "$UPSTREAM")
 
+GREENFG="\e[38;5;82m"
+REDWEAKFG="\e[38;5;132m"
+BBLUEFG="\e[1;38;5;75m"
+GBLUEFG="\e[1;38;5;73m"
+FOLDERNAMEFG="\e[1;38;5;45m"
+ERRORFG="\e[1;38;5;197m"
+RESET="\e[0m"
+BOLD="\e[1m"
+
+if [ $LOCAL = $REMOTE ]; then
+    echo -e ${GREENFG}"Up-to-date"${RESET}
+elif [ $LOCAL = $BASE ]; then
+  git stash
+  git pull https://github.com/joshilita/newOS
+  chmod +x ~/newOS/test
+  chmod +x ~/newOS/toor
+  echo "Done!"
+  sleep 2
+  echo "Completed!"
+  
+  exit 0
+fi
+
+#echo "Press CTRL+Z to stop the running OS to complete the update."
 
 echo "This is a test. Please know that there will be errors during your test."
-echo ""
-echo "There is only one option because this is just a test. 
-What do you want to do?
-(cd, ls)"
-read cd
-
-if (echo "$to" | fgrep -wq -e home);then
-echo "You are already home!"
-fi
-
-if (echo "$cd" | fgrep -wq -e cd);then
-   read -p "what do you want to cd?: " to
-else
-   echo "unknown, Please try again."
-fi
-if (echo "$cd" | fgrep -wq -e exit);then
-    kill -9 $(pgrep -f toor)
-else
-    echo "Not a directory! Please try again."
-fi
-if (echo "$to" | fgrep -wq -e root);then
-   echo "Switching to root..." && sleep 2
-   echo "You have switched to root! Please wait..."
-   sleep 4
-   sh ~/newOS/toor
-fi
+echo
 
 while true; do
-echo "There is only one option because this is just a test. 
-What do you want to do?
-(cd)"
-read cd
-
-if (echo "$cd" | fgrep -wq -e cd);then
-   read -p "what do you want to cd?: " to
-else
-   echo "unknown, Please try again."
-fi
-
-if (echo "$to" | fgrep -wq -e home);then
-    echo "You are already home!"
-else
-    echo "Not a directory! Please try again."
-fi
-if (echo "$to" | fgrep -wq -e root);then
-   echo "Switching to root..." && sleep 2
-   echo "You have switched to root! Please wait..."
-   sleep 4
-   sh ~/newOS/toor
-fi
+  echo "There is only one option because this is just a test.
+What do you want to do? (cd, ls,exit)"
+  read cd
+  
+  if (echo "$cd" | fgrep -wq -e exit);then
+    echo -e "${GREENFG}Exiting...${RESET}"
+    exit 0
+  elif (echo "$cd" | fgrep -wq -e cd);then
+    read -p "what do you want to cd?: " to
+    if (echo "$to" | fgrep -wq -e home);then
+     echo "You are already home!"
+    elif (echo "$to" | fgrep -wq -e root);then
+      echo "Switching to root..." && sleep 2
+      echo "You have switched to root! Please wait..."
+      bash ~/newOS/toor
+      echo -en "\ec"
+      echo -e "${GBLUEFG}Greetings again${RESET}\n"
+    else
+      echo "Not a directory! Please try again."
+    fi
+  else
+    echo "unknown, Please try again."
+  fi
 done
  
