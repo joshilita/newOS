@@ -11,7 +11,6 @@ BOLD="\e[1m"
 declare -a dirs
 
 function addFile {
-  dirlength=dirlength+1
   dirs+=( $1 )
 }
 
