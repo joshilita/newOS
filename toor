@@ -1,3 +1,4 @@
+#! /bin/bash
 echo "You are now in root. Remember this is just a demo or a test. Type ls to find a file you need"
 
 GREENFG="\e[38;5;82m"
