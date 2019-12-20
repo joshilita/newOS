@@ -1,41 +1,38 @@
 echo "You are now in root. Remember this is just a demo or a test. Type ls to find a file you need"
-read -p "User@localhost /root$" input
-if (echo "$input" | fgrep -wq -e ls);then
-  echo "$mser"
-  echo "If no files are found, type mdir to create a directory."
-else
-  echo "Command not found."
-fi
 
-if (echo "$input" | fgrep -wq -e exit);then
-kill -9 $(pgrep -f toor)
-fi
+GREENFG="\e[38;5;82m"
+REDWEAKFG="\e[38;5;132m"
+BBLUEFG="\e[1;38;5;75m"
+FOLDERNAMEFG="\e[1;38;5;45m"
+ERRORFG="\e[1;38;5;197m"
+RESET="\e[0m"
+BOLD="\e[1m"
 
-read -p "User@localhost /root$" input2
+declare -a dirs
 
-if (echo "$input2" | fgrep -wq -e mdir);then
-   read -p "What does your directory name want to be?" mser
-else
-   echo "Command not found."
-fi
+function addFile {
+  dirs+=( $1 )
+}
 
-echo "Directory $mser has been created!"
 while true; do
-echo "You are now in root. Remember this is just a demo or a test. Type ls to find a file you need"
-read -p "User@localhost /root$" input
-if (echo "$input" | fgrep -wq -e ls);then
-  echo "$mser"
-  echo "If no files are found, type mdir to create a directory."
-else
-  echo "Command not found."
-fi
+  echo -e -n "(${GREENFG}User${RESET}@${REDWEAKFG}localhost${RESET} ${BBLUEFG}/root${RESET}) ${BOLD}\$${RESET}"
+  read input
 
-read -p "User@localhost /root$" input2
+  if ( echo $input | fgrep -wq -e exit );then
+    echo -e "${GREENFG}Exiting...${RESET}"
+    exit 0
+  fi
 
-if (echo "$input2" | fgrep -wq -e mdir);then
-   read -p "What does your directory name want to be?" mser
-else
-   echo "Command not found."
-fi
+  if (echo "$input" | fgrep -wq -e ls);then
+    if [[ ${#dirs[@]} == 0 ]]; then
+      echo "If no files are found, type mdir to create a directory."
+    else
+      echo -e "${FOLDERNAMEFG}${dirs[@]}${RESET}"
+    fi
+  elif (echo "$input" | fgrep -wq -e mdir);then
+     read -p "What does your directory name want to be?" dir
+     addFile $dir
+  else
+    echo -e "${ERRORFG}Command not found.${RESET}"
+  fi
 done
-
